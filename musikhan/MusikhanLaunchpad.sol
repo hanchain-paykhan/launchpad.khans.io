@@ -9,8 +9,6 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV2V3Interface.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "./IMusikhan.sol";
-import "./HANePlatform.sol";
-
 /*
     1. Calculate HANeP token price: Using Chainlink Oracles to get the current price of ETH in USD and then calculating HANeP's current price based on the balance of WETH and HANeP in the Uniswap pool.
     2. Musikhan token exchange: Allows users to burn HANeP tokens to receive Musikhan tokens. The price of Musikhan tokens is based on the current price of HANeP tokens.
@@ -18,8 +16,8 @@ import "./HANePlatform.sol";
 
 contract MusikhanLaunchpad is Ownable, Pausable, ReentrancyGuard {
     IERC20 public constant weth = IERC20(0x4200000000000000000000000000000000000006);    // Optimism
-    HANePlatform public constant hanep = HANePlatform(0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB);    // Optimism
-    // HANePlatform public constant hanep = HANePlatform(0xE947Af98dC5c2FCfcc2D2F89325812ba5d332b41); // Optimism Goerli
+    IERC20 public constant hanep = IERC20(0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB);    // Optimism
+    // IERC20 public constant hanep = IERC20(0xE947Af98dC5c2FCfcc2D2F89325812ba5d332b41); // Optimism Goerli
     
     address public constant ethPriceFeedAddress = 0x13e3Ee699D1909E989722E753853AE30b17e08c5; // ETH/USD Optimism
     // address public constant ethPriceFeedAddress = 0x57241A37733983F97C4Ab06448F244A1E0Ca0ba8; // ETH/USD Optimism Goerli
@@ -91,11 +89,11 @@ contract MusikhanLaunchpad is Ownable, Pausable, ReentrancyGuard {
         (, int ethPrice, , ,) = ethFeed.latestRoundData();
 
         // Get the current balance of WETH (wrapped ether) from the Uniswap pool.
-        uint256 reserve0 = weth.balanceOf(pairAddress);  // Optimism
+        uint256 reserve0 = weth.balanceOf(pairAddress);
         require (reserve0 != 0, "weth : Invalid amount");
 
         // Get the current balance of HANeP tokens from the Uniswap pool.
-        uint256 reserve1 = hanep.balanceOf(pairAddress); // Optimism
+        uint256 reserve1 = hanep.balanceOf(pairAddress);
         require (reserve1 != 0, "hanep : Invalid amount");
 
         // Calculate the current price of the HANeP token.
@@ -150,9 +148,6 @@ contract MusikhanLaunchpad is Ownable, Pausable, ReentrancyGuard {
         // Ensure the user has transferred enough HANeP tokens. If not, the transfer fails.
         require(hanep.transferFrom(msg.sender, address(this), burnAmount), "Transfer failed");
 
-    // Burn the calculated amount of HANeP tokens.
-        hanep.burn(burnAmount);
-    
         // Transfer the requested amount of Musikhan tokens to the user.
         IMusikhan(_token).transfer(msg.sender, _musikhanAmount);
 
