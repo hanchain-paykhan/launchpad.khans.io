@@ -1,5 +1,29 @@
 Contract Information
 
-# MusikhanLaunchpad - Optimistic Ethereum Network
+# Musikhan Launchpad on Optimism
 
-0x383d6EE54C9eB2980613f70bA364e1Ca6E1b41FC
+### Launchpad Token Name (Symbol)
+- MusiKhan Tokens (numerous)
+
+### Launchpad Token Type
+- ERC-20
+
+### Launchpad Token Brief
+- Proof of ownership of Music Copyright Royalty.
+- Contract (OP) : numerous address
+
+### Launchpad Contract address
+- optimism: 0x383d6EE54C9eB2980613f70bA364e1Ca6E1b41FC
+
+### Token to burn to receive MusiKhan tokens on Launchpad
+- HANePlatform (HANeP) Token (optimism: 0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB)
+- Buy HANeP token on Optimism : https://app.uniswap.org/swap?inputCurrency=0x4200000000000000000000000000000000000006&outputCurrency=0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB&chain=optimism
+
+### Burn amount to receive MusiKhan
+- 2,100 USD worth of HANeP per 100 MusiKhan
+
+### MusiKhan tokens distribution
+- Real-time
+
+### Launchpad URL
+- https://staking.khans.io/hanep
