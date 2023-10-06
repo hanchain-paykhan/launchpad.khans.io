@@ -16,8 +16,9 @@ Contract Information
 - optimism: 0x383d6EE54C9eB2980613f70bA364e1Ca6E1b41FC
 
 ### Token to burn to receive MusiKhan tokens on Launchpad
-- HANePlatform (HANeP) Token (optimism: 0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB)
-- Buy HANeP token on Optimism : https://app.uniswap.org/swap?inputCurrency=0x4200000000000000000000000000000000000006&outputCurrency=0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB&chain=optimism
+- HANePlatform (HANeP) Token
+- Contract (OP) : 0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB
+- Buy HANeP : https://app.uniswap.org/swap?inputCurrency=0x4200000000000000000000000000000000000006&outputCurrency=0xC3248A1bd9D72fa3DA6E6ba701E58CbF818354eB&chain=optimism
 
 ### Burn amount to receive MusiKhan
 - 2,100 USD worth of HANeP per 100 MusiKhan
