@@ -1,6 +1,6 @@
 Contract Information
 
-# Musikhan Launchpad on Optimism
+# Launchpad Musikhan on Optimism
 
 ### Launchpad Token Name (Symbol)
 - MusiKhan Tokens (numerous)
@@ -13,7 +13,7 @@ Contract Information
 - Contract (OP) : numerous address
 
 ### Launchpad Contract address
-- optimism: 0x383d6EE54C9eB2980613f70bA364e1Ca6E1b41FC
+- optimism: 0xB38f607b8BbA83B4027B00bA1Ea1f7A1b03CB7D8
 
 ### Token to burn to receive MusiKhan tokens on Launchpad
 - HANePlatform (HANeP) Token
