@@ -28,3 +28,8 @@ Contract Information
 
 ### Launchpad URL
 - https://staking.khans.io/hanep
+
+# LaunchpadMusiKhanNFT (PAD-MKN)
+
+### Contract address
+- optimism: 0xA7333Ec665D8F3f617a4C1e9F299ad05Bda908B7
