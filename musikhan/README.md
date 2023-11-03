@@ -29,34 +29,27 @@ Contract Information
 ### Launchpad URL
 - https://launchpad.khans.io/musikhan
 
-# LaunchpadMusiKhanNFT (PAD-MKN)
+# Transferreward Launchpad-MusiKhan NFT on Optimism
 
-### Contract address
-- optimism: 0xA7333Ec665D8F3f617a4C1e9F299ad05Bda908B7
-
-# Staking Launchpad MusiKhan on Optimism
-
-### Staking Token Name (Symbol)
+### Transferred NFT (Symbol)
 - LaunchpadMusiKhanNFT (PAD-MKN)
 
-### Staking Token Type
-- ERC-721
-
-### Staking Token Brief
+### Transferred NFT Brief
 - Proof of acquisition of MusiKhan tokens through Launchpad.
 - Contract (OP) : 0xA7333Ec665D8F3f617a4C1e9F299ad05Bda908B7
 
-### When burning HANeP to receive MusiKhan, also acquire NFT 
+### How to get NFT
+- When burning HANeP to receive MusiKhan, also acquire NFT 
 - https://launchpad.khans.io/musikhan
 
-### Staking Contract address
+### Transferreward Contract address
 - optimism: 0x7f6e7934Dc22963e60c3D16900d39421741B7BeC
 
-### Unstaking Staked Token
-- Flexible
+### Whether can get back NFT
+- Irreversible
 
 ### Reward Amount
-- 0.000001041666666666 HANeP per token/sec
+- 0.000001041666666666 HANeP per NFT/sec
 
 ### Staking Rewards Duration
 - 365 Days
