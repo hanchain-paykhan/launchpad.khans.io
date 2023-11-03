@@ -27,7 +27,7 @@ Contract Information
 - Real-time
 
 ### Launchpad URL
-- https://staking.khans.io/hanep
+- https://launchpad.khans.io/musikhan
 
 # LaunchpadMusiKhanNFT (PAD-MKN)
 
