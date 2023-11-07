@@ -43,7 +43,7 @@ Contract Information
 - https://launchpad.khans.io/musikhan
 
 ### Transferreward Contract address
-- optimism: 0x7f6e7934Dc22963e60c3D16900d39421741B7BeC
+- optimism: 0xbf8CacCD936a99D83Fa12fC703E502f871908caA
 
 ### Whether can get back NFT
 - Irreversible
@@ -51,8 +51,8 @@ Contract Information
 ### Reward Amount
 - 0.000001041666666666 HANeP per NFT/sec
 
-### Staking Rewards Duration
+### Transfer Rewards Duration
 - 365 Days
 
-### Staking URL
+### Transferreward URL
 - https://launchpad.khans.io/staking
