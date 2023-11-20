@@ -20,13 +20,13 @@
 - LiquidityReward_2 : ETH at $2,000 + 10% bonus
 - LiquidityReward_3 : ETH at $10,000 + 20% bonus
 
-### Remove Staked LP (HAN-WBTC)
-- 365-Day Wait
-
 ### Reward Amount
 - LiquidityReward_1 : 7.11190997508477 HAN per token/sec
 - LiquidityReward_2 : 6.84046302947085 HAN per token/sec
 - LiquidityReward_3 : 6.29756913824301 HAN per token/sec
+
+### Remove Staked LP (HAN-WBTC)
+- 365-Day Wait
 
 ### Launchpad URL
 - https://launchpad.khans.io/hanchain
