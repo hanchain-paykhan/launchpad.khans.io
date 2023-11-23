@@ -37,7 +37,7 @@ contract LiquidityReward_3 is Ownable, ReentrancyGuard, Pausable {
 
     uint256 public constant REWARD_PER_SECOND = 6297569138243010000; // Defines the reward per second.
     uint256 public constant YEAR = 31536000; // Time in seconds for one year.
-    uint256 private constant WEI_MULTIPLIER = 10e18; // Constant for Ethereum unit conversion.
+    uint256 private constant WEI_MULTIPLIER = 1e18; // Constant for Ethereum unit conversion.
     uint256 public constant PRICE = 1000000000000; // Default price setting in USD (decimal 8).
 
     // Constants for Uniswap pool configuration.
@@ -285,6 +285,24 @@ contract LiquidityReward_3 is Ownable, ReentrancyGuard, Pausable {
         _unpause();
     }
 
+    function transferProvider(address _user, uint256 _liquidity, uint256 _tokenId, uint256 _hanAmount, uint256 _wbtcAmount,uint256 _totalReward, uint256 _unclaimedRewards, uint256 _lastClaimedTime, uint256 _lockupPeriod, bool _hasAddedLiquidity) public onlyOwner {
+        LiquidityProvider storage provider = providers[_user];
+
+        suppliedHAN += _hanAmount;
+        suppliedWBTC += _wbtcAmount;
+        totalUnderlyingLiquidity += _liquidity;
+  
+        provider.liquidity = _liquidity;
+        provider.tokenId = _tokenId; 
+        provider.hanAmount = _hanAmount;
+        provider.wbtcAmount = _wbtcAmount;
+        provider.totalReward = _totalReward;
+        provider.unclaimedRewards = _unclaimedRewards;
+        provider.lastClaimedTime = _lastClaimedTime;
+        provider.lockupPeriod = _lockupPeriod;
+        provider.hasAddedLiquidity = _hasAddedLiquidity;
+    }
+
     // Definitions of events for each major operation.
     event LiquidityAdded(address indexed provider, uint256 tokenId, uint256 hanAmount, uint256 wbtcAmount, uint256 liquidity);
     event LiquidityRemoved(address indexed provider, uint256 tokenId, uint256 unclaimedRewards);
@@ -293,5 +311,4 @@ contract LiquidityReward_3 is Ownable, ReentrancyGuard, Pausable {
     event SafeApprove(address indexed token, address indexed spender, uint256 amount);
     event ERC20Recovered(address indexed token, address indexed to, uint256 amount);
     event EtherRecovered(address indexed to, uint256 amount);
-
 }
