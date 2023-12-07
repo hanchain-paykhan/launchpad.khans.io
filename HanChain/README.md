@@ -14,16 +14,19 @@
 - LiquidityReward_1 : 0xAA2afE53DA5E752F9C6a39b1Ba76e14336Bef587
 - LiquidityReward_2 : 0x5B7bF2B2Bb08d90D9a651e1C3Db2B94c3d9067EE
 - LiquidityReward_3 : 0x95305eC949f9A98477cE29dFb4f8350246061da6
+- LiquidityReward_4 : 0xF0BbbFb9080E6aECB43bEdB112b2f38f7E1bFf5f
 
 ### Cryptocurrency for Launchpad participation
 - LiquidityReward_1 : ETH at $750 + 5% bonus
 - LiquidityReward_2 : ETH at $2,000 + 10% bonus
 - LiquidityReward_3 : ETH at $10,000 + 20% bonus
+- LiquidityReward_4 : ETH over $10,000 unlimited
 
 ### Reward Amount
 - LiquidityReward_1 : 7.11190997508477 HAN per token/sec
 - LiquidityReward_2 : 6.84046302947085 HAN per token/sec
 - LiquidityReward_3 : 6.29756913824301 HAN per token/sec
+- LiquidityReward_4 : 7.38335692069869 HAN per token/sec
 
 ### Remove Staked LP (HAN-WBTC)
 - 365-Day Wait
