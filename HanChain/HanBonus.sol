@@ -88,7 +88,9 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
         referrerArray[msg.sender].push(referrer);
 
         totalInfo.totalStakedAmount += amount;
+        totalInfo.totalReferrerRewardAmount += amount;
         totalSupply += amount;
+
         delete referrerRewardAmount[msg.sender];
         removeAddress(referrerList, msg.sender);
         emit Staked(msg.sender, amount);
@@ -110,7 +112,7 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
         removeReferrer(_index);    
     }
 
-    function claimRewards() external nonReentrant {
+    function claimRewards() external nonReentrant whenNotPaused {
         TotalReferrerInfo storage totalInfo = totalReferrer[msg.sender];
         uint256 reward;
 
@@ -212,7 +214,6 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
     }
 
     // ------------------ EVENTS ------------------ //
-
     event ReferrerAdded(address indexed user);
     event RewardUpdated(address indexed user, uint256 amount);
     event Staked(address indexed user, uint256 amount);
