@@ -46,10 +46,12 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
     int24 public immutable TICK_UPPER = 887200;
     
     // Variables related to liquidity.
+    uint256 public persent = 10;
     uint256 public suppliedWBTC;
     uint256 public suppliedHAN;
     uint256 public totalUnderlyingLiquidity;
-    address public authorizedAddress;
+    address public v1AuthorizedAddress;
+    address public v2AuthorizedAddress;
 
     // Structure to store information about liquidity providers.
     struct LiquidityProvider {
@@ -70,6 +72,7 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
         uint256 totalRewardReleased; // Total reward released to the provider
         uint256 unclaimedRewards; // Unclaimed rewards of the provider
         uint256 referrerReward; // Referrer reward of the provider
+        uint256 liquidityReward; // Provider reward of the provider
     }
     mapping (address => TotalLiquidityInfo) public totalLiquidityInfo; // Mapping to store the total information of a liquidity provider.
 
@@ -77,7 +80,7 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
     function addLiquidity() external payable nonReentrant {
         TotalLiquidityInfo storage totalInfo = totalLiquidityInfo[msg.sender];
         
-        WETH.deposit{value: msg.value}(); // Convert Ether to WETH.
+        WETH.deposit{value: msg.value}(); // Convert Ether to WETH. 
 
         uint256 providedEthAmount = msg.value; // Store the amount of Ether provided.
         uint256 currentEthAmount = getEthAmount(PRICE); // Calculate the amount of Ether for the given PRICE.
@@ -101,7 +104,8 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
         totalInfo.totalLiquidity += liquidity; // Add the liquidity to the liquidity provider's total liquidity.
         totalInfo.totalHanAmount += amount0; // Add the HAN amount to the liquidity provider's total HAN amount.
         totalInfo.totalWbtcAmount += amount1; // Add the WBTC amount to the liquidity provider's total WBTC amount.
-        totalInfo.referrerReward += amount0 * 2 / 10; // Add the referrer reward to the liquidity provider's referrer reward.
+        totalInfo.referrerReward += amount0 * 2 / persent; // Add the referrer reward to the liquidity provider's referrer reward.
+        totalInfo.liquidityReward += amount0; // Add the liquidity reward to the liquidity provider's liquidity reward.
 
         _addToProviderArray(msg.sender, tokenId, liquidity, amount0, amount1);
 
@@ -172,8 +176,8 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
     }
 
     // Function to add a referrer list.
-    function registration(address _user) external nonReentrant returns (uint256) {
-        require(msg.sender == authorizedAddress, "Not authorized");
+    function registrationV1(address _user) external nonReentrant returns (uint256) {
+        require(msg.sender == v1AuthorizedAddress, "Not authorized");
         TotalLiquidityInfo storage totalInfo = totalLiquidityInfo[_user];
         uint256 reward;
         reward = totalInfo.referrerReward; // Store the referrer reward.
@@ -183,11 +187,34 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
         return reward;
     }
 
-    // Function to set the authorized address.
-    function setAuthorizedAddress(address _authorizedAddress) external onlyOwner nonReentrant {
-        authorizedAddress = _authorizedAddress;
-        emit AuthorizedAddressSet(_authorizedAddress);
+    // Function to set the v1 authorized address.
+    function setV1AuthorizedAddress(address _v1AuthorizedAddress) external onlyOwner nonReentrant {
+        v1AuthorizedAddress = _v1AuthorizedAddress;
+        emit V1AuthorizedAddressSet(_v1AuthorizedAddress);
     }
+
+    // Function to add a provider list.
+    function registrationV2(address _user) external nonReentrant returns (uint256) {
+        require(msg.sender == v2AuthorizedAddress, "Not authorized");
+        TotalLiquidityInfo storage totalInfo = totalLiquidityInfo[_user];
+        uint256 reward = 0;
+        reward += totalInfo.liquidityReward; // Store the provider reward.
+        totalInfo.liquidityReward = 0; // Reset the provider reward.
+        emit ReferrerRegistered(_user, reward);
+        return reward;
+    }
+
+    // Function to set the v2 authorized address.
+    function setV2AuthorizedAddress(address _v2AuthorizedAddress) external onlyOwner nonReentrant {
+        v1AuthorizedAddress = _v2AuthorizedAddress;
+        emit V2AuthorizedAddressSet(_v2AuthorizedAddress);
+    }
+
+    // Function set the persent.
+    function setPersent(uint256 _persent) external onlyOwner nonReentrant {
+        persent = _persent;
+        emit SetPersent(_persent);
+    }   
 
     // Function to view the reward amount for a specific user.
     function rewardView(address _user) public view returns (uint256) {
@@ -360,7 +387,9 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
     event RewardsClaimed(address indexed provider, uint256 reward);
     event ReferrerRegistered(address indexed user, uint256 reward);
     event MusikhanAdded(address indexed musikhan, uint256 amount);
-    event AuthorizedAddressSet(address indexed newAuthorizedAddress);
+    event V1AuthorizedAddressSet(address indexed newAuthorizedAddress);
+    event V2AuthorizedAddressSet(address indexed newAuthorizedAddress);
+    event SetPersent(uint256 indexed persent);
     event SwapWETHForWBTC(address indexed sender, uint256 wethAmount, uint256 wbtcReceived);
     event SafeApprove(address indexed token, address indexed spender, uint256 amount);
     event ERC20Recovered(address indexed token, address indexed to, uint256 amount);
