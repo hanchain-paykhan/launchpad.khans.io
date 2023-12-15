@@ -12,7 +12,7 @@ import "./LiquidityReward_4.sol";
 contract HanBonus is ReentrancyGuard, Ownable, Pausable {
 
     IERC20 public constant HAN = IERC20(0x50Bce64397C75488465253c0A034b8097FeA6578);
-    LiquidityReward_4 public constant LIQUIDITY_REWARD = LiquidityReward_4(0xF0BbbFb9080E6aECB43bEdB112b2f38f7E1bFf5f);
+    LiquidityReward_4 public constant LIQUIDITY_REWARD = LiquidityReward_4(0x1df78bAc48eA78Be969370765a6238C91e5Ce6c2);
 
     // Structure to store the information of a liquidity Referrer.
     struct Referrer {
@@ -62,12 +62,12 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
             }
 
             uint256 amount;
-            (,,,,,uint256 referrerReward) = LIQUIDITY_REWARD.totalLiquidityInfo(user);
+            (,,,,,uint256 referrerReward,) = LIQUIDITY_REWARD.totalLiquidityInfo(user);
             if(referrerReward == 0) {
                 revert("don't have any reward");
             }
 
-            amount = LIQUIDITY_REWARD.registration(user);
+            amount = LIQUIDITY_REWARD.registrationV1(user);
             referrerRewardAmount[user] += amount;
             emit RewardUpdated(user, amount);
         }
