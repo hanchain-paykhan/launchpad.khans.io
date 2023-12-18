@@ -206,7 +206,7 @@ contract LiquidityReward_4 is Ownable, ReentrancyGuard, Pausable {
 
     // Function to set the v2 authorized address.
     function setV2AuthorizedAddress(address _v2AuthorizedAddress) external onlyOwner nonReentrant {
-        v1AuthorizedAddress = _v2AuthorizedAddress;
+        v2AuthorizedAddress = _v2AuthorizedAddress;
         emit V2AuthorizedAddressSet(_v2AuthorizedAddress);
     }
 
