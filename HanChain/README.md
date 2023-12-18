@@ -14,7 +14,7 @@
 - LiquidityReward_1 : 0xAA2afE53DA5E752F9C6a39b1Ba76e14336Bef587
 - LiquidityReward_2 : 0x5B7bF2B2Bb08d90D9a651e1C3Db2B94c3d9067EE
 - LiquidityReward_3 : 0x95305eC949f9A98477cE29dFb4f8350246061da6
-- LiquidityReward_4 : 0x1df78bAc48eA78Be969370765a6238C91e5Ce6c2
+- LiquidityReward_4 : 0x23f2fBF0A4F814d5B45741749e2fb589f061c24A
 - HanBonus : 0xaC2e2f94bBEdA3277A827F27841703fa1CF4f361
 
 ### Cryptocurrency for Launchpad participation
