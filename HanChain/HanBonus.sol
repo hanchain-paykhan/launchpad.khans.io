@@ -12,7 +12,7 @@ import "./LiquidityReward_4.sol";
 contract HanBonus is ReentrancyGuard, Ownable, Pausable {
 
     IERC20 public constant HAN = IERC20(0x50Bce64397C75488465253c0A034b8097FeA6578);
-    LiquidityReward_4 public constant LIQUIDITY_REWARD = LiquidityReward_4(0x1df78bAc48eA78Be969370765a6238C91e5Ce6c2);
+    LiquidityReward_4 public constant LIQUIDITY_REWARD = LiquidityReward_4(0x23f2fBF0A4F814d5B45741749e2fb589f061c24A);
 
     // Structure to store the information of a liquidity Referrer.
     struct Referrer {
