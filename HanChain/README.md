@@ -15,7 +15,7 @@
 - LiquidityReward_2 : 0x5B7bF2B2Bb08d90D9a651e1C3Db2B94c3d9067EE
 - LiquidityReward_3 : 0x95305eC949f9A98477cE29dFb4f8350246061da6
 - LiquidityReward_4 : 0x23f2fBF0A4F814d5B45741749e2fb589f061c24A
-- HanBonus : 0xaC2e2f94bBEdA3277A827F27841703fa1CF4f361
+- HanBonus : 0xD38E5cF49343A284dda9f383015107e9f6bB8cEb
 
 ### Cryptocurrency for Launchpad participation
 - LiquidityReward_1 : ETH at $750 + 5% bonus
