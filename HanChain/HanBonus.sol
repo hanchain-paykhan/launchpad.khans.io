@@ -20,7 +20,6 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
         uint256 lastClaimedTime; // Last time rewards were claimed.
         uint256 withdrawalTime; // Time when the withdrawal is available
     }
-    mapping(address => Referrer) private referrers; // Mapping to store the information of a liquidity referrers.
     mapping(address => Referrer[]) private referrerArray; // Mapping to store the information of a liquidity referrerArray.
 
     // structure to store the total information of a liquidity TotalReferrerInfo.
@@ -38,54 +37,54 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
 
     uint256 public totalSupply; // Total amount of HAN token staked
     address[] private referrerList; // Array to store the information of a liquidity referrerList.
+    address[] private providerList; // Array to store the information of a liquidity providerList.
+    mapping (address => bool) public isProvider; // Mapping to store the information of a liquidity isProvider.
+    mapping (address => bool) public isReferrer; // Mapping to store the information of a liquidity isReferrer.
     mapping(address => uint256) public referrerRewardAmount; // Mapping to store the information of a liquidity referrerRewardAmount.
 
     // Function to add the address of a liquidity referrer.
-    function addReferrerList(address[] memory _accounts) public onlyOwner {
-        for (uint i = 0; i < _accounts.length; i++) {
-
-            address user = _accounts[i];
+    function addReferrerList(address[] memory _providers, address[] memory _referrers) public onlyOwner {
+        require(_providers.length == _referrers.length, "The lengths of the _providers and _referrers arrays must be equal");
+        for (uint i = 0; i < _providers.length; i++) {
+            address provider = _providers[i];
+            address referrer = _referrers[i];
             for (uint j = 0; j < i; j++) {
-                require(_accounts[j] != user, "Duplicate accounts are not allowed");
+                require(_providers[j] != provider, "Duplicate accounts are not allowed");
+                require(_referrers[j] != referrer, "Duplicate accounts in _referrers are not allowed");
             }
 
-            bool isExisting = false;
-            for (uint k = 0; k < referrerList.length; k++) {
-                if (referrerList[k] == user) {
-                    isExisting = true;
-                    break;
-                }
+            if (!isProvider[provider]) {
+                isProvider[provider] = true;
+                providerList.push(provider);
+                ProviderAdded(provider);
             }
-            if (!isExisting) {
-                referrerList.push(user);
-                emit ReferrerAdded(user);
+
+            if (!isReferrer[referrer]) {
+                isReferrer[referrer] = true;
+                referrerList.push(referrer);
+                ReferrerAdded(referrer);
             }
 
             uint256 amount;
-            (,,,,,uint256 referrerReward,) = LIQUIDITY_REWARD.totalLiquidityInfo(user);
+            (,,,,,uint256 referrerReward,) = LIQUIDITY_REWARD.totalLiquidityInfo(provider);
             if(referrerReward == 0) {
                 revert("don't have any reward");
             }
 
-            amount = LIQUIDITY_REWARD.registrationV1(user);
-            referrerRewardAmount[user] += amount;
-            emit RewardUpdated(user, amount);
+            amount = LIQUIDITY_REWARD.registrationV1(provider);
+            referrerRewardAmount[referrer] += amount;
+            emit RewardUpdated(referrer, amount);
         }
     }
 
     // Function to stake HAN token.
     function stake() public nonReentrant whenNotPaused {
-        Referrer memory referrer = referrers[msg.sender];
         TotalReferrerInfo storage totalInfo = totalReferrer[msg.sender];
         require(HAN.balanceOf(address(this)) > referrerRewardAmount[msg.sender] * REWARD_PER_SECOND * YEAR / WEI_MULTIPLIER, "Total amount of rewards is too high");
         require(referrerRewardAmount[msg.sender] > 0, "Not a whitelisted user");
         uint256 amount = referrerRewardAmount[msg.sender];
 
-        referrer.amount = amount;
-        referrer.lastClaimedTime = block.timestamp;
-        referrer.withdrawalTime = block.timestamp + YEAR;
-
-        referrerArray[msg.sender].push(referrer);
+        _addToReferrerArray(msg.sender, amount);
 
         totalInfo.totalStakedAmount += amount;
         totalInfo.totalReferrerRewardAmount += amount;
@@ -103,7 +102,6 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
         require(block.timestamp > referrer.withdrawalTime, "It's not the time to withdraw");
 
         totalSupply -= referrer.amount;
-
         totalInfo.totalStakedAmount -= referrer.amount;
         totalInfo.unclaimedRewards += _calculateRewards(msg.sender, _index);
 
@@ -166,6 +164,20 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
         return referrerList;
     }
 
+    // Function to return to provider list.
+    function getProviderList() public view returns(address[] memory) {
+        return providerList;
+    }
+
+    function _addToReferrerArray(address _user, uint256 _amount) private {
+        Referrer memory newReferrer = Referrer({
+            amount: _amount,
+            lastClaimedTime: block.timestamp,
+            withdrawalTime: block.timestamp + YEAR
+        });
+        referrerArray[_user].push(newReferrer);
+    }
+
     // private function to calculate rewards for a user.
     function _calculateRewards(address _user, uint256 _index) private view returns (uint256) {
         Referrer memory referrer = referrerArray[_user][_index];
@@ -176,21 +188,29 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
     }
 
     // Functions to pause or unpause the contract.
-    function pause() public onlyOwner {
+    function pause() public onlyOwner nonReentrant {
         _pause();
     }
-    function unpause() public onlyOwner {
+    function unpause() public onlyOwner nonReentrant {
         _unpause();
     }
 
     // Functions to recover wrong tokens or Ether sent to the contract.
-    function recoverERC20(address _tokenAddress, uint256 _tokenAmount) external onlyOwner {
+    function recoverERC20(address _tokenAddress, uint256 _tokenAmount) external onlyOwner nonReentrant {
         IERC20(_tokenAddress).transfer(msg.sender, _tokenAmount);
         emit RecoveredERC20(_tokenAddress, _tokenAmount);
     }
-    function recoverERC721(address _tokenAddress, uint256 _tokenId) external onlyOwner {
+    function recoverERC721(address _tokenAddress, uint256 _tokenId) external onlyOwner nonReentrant {
         IERC721(_tokenAddress).safeTransferFrom(address(this),msg.sender,_tokenId);
         emit RecoveredERC721(_tokenAddress, _tokenId);
+    }
+    function recoverReferrerRewardAmount(address _removeReferrer, uint256 _removeAmount, address _addReferrer, uint256 _addAmount) external onlyOwner nonReentrant {
+        if(_removeAmount > referrerRewardAmount[_removeReferrer]) {
+            revert("removeAmount is too high");
+        }
+        referrerRewardAmount[_removeReferrer] -= _removeAmount;
+        referrerRewardAmount[_addReferrer] += _addAmount;
+        emit RecoveredReferrerRewardAmount(_removeReferrer, _removeAmount, _addReferrer, _addAmount);
     }
     function recoverEther(address payable _recipient, uint256 _ethAmount) external onlyOwner nonReentrant{
         _recipient.transfer(_ethAmount);
@@ -214,6 +234,7 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
     }
 
     // ------------------ EVENTS ------------------ //
+    event ProviderAdded(address indexed user);
     event ReferrerAdded(address indexed user);
     event RewardUpdated(address indexed user, uint256 amount);
     event Staked(address indexed user, uint256 amount);
@@ -221,5 +242,6 @@ contract HanBonus is ReentrancyGuard, Ownable, Pausable {
     event RewardPaid(address indexed user, uint256 reward);
     event RecoveredERC20(address token, uint256 amount);
     event RecoveredERC721(address token, uint256 tokenId);
+    event RecoveredReferrerRewardAmount(address indexed removeUser, uint256 removeAmount, address indexed addUser, uint256 addAmount);
     event RecoveredEther(address indexed to, uint256 amount);
 }
