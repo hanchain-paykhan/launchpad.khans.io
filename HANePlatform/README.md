@@ -18,7 +18,7 @@
 
 ### Cryptocurrency for Launchpad participation
 - LiquidityReward_HANeP_1 : ETH at $750 + 5% bonus
-- LiquidityReward_HANeP_4 : ETH over $10,000 unlimited
+- LiquidityReward_HANeP_4 : ETH over $10,000 unlimited, [HAN-2000](https://github.com/hanchain-paykhan/launchpad.khans.io/tree/main/HanChain#stake-han-wbtc-liquidity-to-han-launchpad) LaunchPad pre-participation required
 - HanepBonusV2 : HANeP Staking, Participant Conversion Benefits, Referrer Reward
 
 ### Reward Amount
