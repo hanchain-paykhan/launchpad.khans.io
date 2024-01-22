@@ -24,7 +24,7 @@
 ### Reward Amount
 - LiquidityReward_HANeP_1 : 0.191936168949772 HANeP per LP/sec
 - LiquidityReward_HANeP_4 : 0.198927221461187 HANeP per LP/sec + 100 MusiKhan per $10,000 Contribution
-- HanepBonusV2 : 0.00000004318912037 HANeP per HAN token/sec
+- HanepBonusV2 : 0.00000004318912037 HANeP per HANeP token/sec
 
 ### Remove Staked LP (HANeP-WBTC)
 - 365-Day Wait
