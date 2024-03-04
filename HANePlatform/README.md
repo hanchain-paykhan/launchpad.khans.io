@@ -15,7 +15,7 @@
 - LiquidityReward_HANeP_1 : 0x6E8f9BDe5171B1E93CFacEf223A7bC38Dc35C353
 - LiquidityReward_HANeP_4 : 0xbF5288E237b6c4Ff01af24d301fF7504Ea12F2F0
 - HanepBonusV2 : 0x21578cDcfe425B2b6376C2c4dd7c159c2bF4aAD7
-- HanepBonusV3 : 0xfEeEf1eb3bF843A7b98a5Fd117851c100045653E
+- HanepBonusV3 : 0x7DB8fBB773EE3Ed35f0b578f6416Fe3f03F2AA6b
 
 ### Cryptocurrency for Launchpad participation
 - LiquidityReward_HANeP_1 : ETH at $750 + 5% bonus
