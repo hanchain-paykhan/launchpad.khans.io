@@ -55,3 +55,7 @@
 ### Launchpad URL
 - Desktop size : https://launchpad.khans.io/hanchain
 - Mobile size : https://staking.khans.io/launchpad
+
+### HanBonusV3 URL
+- Desktop size : https://staking.khans.io/hanep
+- Mobile size : https://staking.khans.io/staking
