@@ -14,6 +14,7 @@ Contract Information
 
 ### Launchpad Contract address
 - optimism: 0xB38f607b8BbA83B4027B00bA1Ea1f7A1b03CB7D8
+- V2 optimism: 0x4f61129699415dFce141b1E8A73933d1F8656fA1
 
 ### Token to burn to receive MusiKhan tokens on Launchpad
 - HANePlatform (HANeP) Token
@@ -33,10 +34,12 @@ Contract Information
 
 ### Transferred NFT (Symbol)
 - LaunchpadMusiKhanNFT (PAD-MKN)
+- V2 : Lunchpad-MusiKhan-V2 NFT (PAD-MKN-V2)
 
 ### Transferred NFT Brief
 - Proof of acquisition of MusiKhan tokens through Launchpad.
 - Contract (OP) : 0xA7333Ec665D8F3f617a4C1e9F299ad05Bda908B7
+- V2 Contract (OP) : 0x0B49864fDB8d7a432DD58AFBaA17742954c8C3Fc
 
 ### How to get NFT
 - When burning HANeP to receive MusiKhan, also acquire NFT 
@@ -44,6 +47,7 @@ Contract Information
 
 ### Transferreward Contract address
 - optimism: 0xbf8CacCD936a99D83Fa12fC703E502f871908caA
+- V2 optimism: 0x5876927f4A38413197D7C2f6ebC38BBA2BA95f27
 
 ### Whether can get back NFT
 - Irreversible
