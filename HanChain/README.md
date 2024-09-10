@@ -11,6 +11,7 @@
 - Contract (OP) : 0x50Bce64397C75488465253c0A034b8097FeA6578
 
 ### Launchpad Contract address on Optimism Network
+- LiquidityReward : 0x5717B32B19F68F853DA556E9c658979328f07A24
 - LiquidityReward_1 : 0xAA2afE53DA5E752F9C6a39b1Ba76e14336Bef587
 - LiquidityReward_1_V2 : 0x23e85A2D27c38ef72E2aa706D473cd6648d27549
 - LiquidityReward_2 : 0x5B7bF2B2Bb08d90D9a651e1C3Db2B94c3d9067EE
@@ -24,6 +25,7 @@
 - HanBonusV3 : 0xA6fd5481B7B61f9C4A7FEb1e1A4e42C98f783aFC
 
 ### Cryptocurrency for Launchpad participation
+- LiquidityReward : ETH at unlimited
 - LiquidityReward_1 : ETH at $750 + 5% bonus
 - LiquidityReward_1_V2 : ETH at $750 + 5% bonus
 - LiquidityReward_2 : ETH at $2,000 + 10% bonus
@@ -37,6 +39,7 @@
 - HanBonusV3 : Participant Conversion Benefits & Referrer Reward Integration
 
 ### Reward Amount
+- LiquidityReward : 3.555954987542385 HAN per LP/sec
 - LiquidityReward_1 : 7.11190997508477 HAN per LP/sec
 - LiquidityReward_1_V2 : 7.11190997508477 HAN per LP/sec
 - LiquidityReward_2 : 6.84046302947085 HAN per LP/sec
@@ -50,7 +53,18 @@
 - HanBonusV3 : 0.00000004318912037 HAN per HAN token/sec
 
 ### Remove Staked LP (HAN-WBTC)
-- 365-Day Wait
+- LiquidityReward : 30-Day Wait
+- LiquidityReward_1 : 365-Day Wait
+- LiquidityReward_1_V2 : 365-Day Wait
+- LiquidityReward_2 : 365-Day Wait
+- LiquidityReward_2_V2 : 365-Day Wait
+- LiquidityReward_3 : 365-Day Wait
+- LiquidityReward_3_V2 : 365-Day Wait
+- LiquidityReward_4 : 365-Day Wait
+- LiquidityReward_4_V2 : 365-Day Wait
+- HanBonus   : 365-Day Wait
+- HanBonusV2 : 365-Day Wait
+- HanBonusV3 : 365-Day Wait
 
 ### Launchpad URL
 - Desktop size : https://launchpad.khans.io/hanchain
